@@ -5,33 +5,34 @@
  */
 package Beans;
 
+import java.sql.Date;
+import java.util.List;
+
 /**
  *
  * @author Simone
  */
 public class Pessoa {
 
-    String empresa;
-    String código;
-    String status;
+    Long id;    
+    String codigo;
+    Status status;
     String nomerazãosocial;
+    String apelidofantasia;
     String cpfcnpj;
     String rgie;
     String região;
-    String vendedor;
-    String cep;
-    String apelidofantasia;
-    String estado;
-    String cidade;
-    String bairro;
-    String endereço;
-    String número;
-    String complemento;
-    String telefone;
-    String email;
+    String vendedor;                
     String referência;
-    String DataAdd;
-    String DataUpd;
     String grupo;
-
+    
+    Date DataAdd;
+    Date DataUpd;
+    
+    Endereco enderecoPrincipal;
+    List<Endereco> enderecos;
+    String emailPrincipal;
+    List<String> emails;
+    String telefonePrincipal;  
+    List<String> telefones;  
 }
