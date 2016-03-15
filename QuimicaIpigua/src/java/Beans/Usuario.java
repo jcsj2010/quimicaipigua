@@ -9,9 +9,60 @@ package Beans;
  *
  * @author Simone
  */
-public class Usuario {
-    Pessoa usuario;
-    String login;
-    String password;
-    Status status;
+public class Usuario extends Pessoa{   
+    
+    private Long idUsuario;
+    private String login;
+    private String password;    
+    private Cargo cargo;
+    private Float comissao;
+    
+    public Usuario(){
+    this.login = new String();
+    this.password = new String();    
+    this.cargo = Cargo.VENDEDOR;
+    this.comissao = 0.1f;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Float getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(Float comissao) {
+        this.comissao = comissao;
+    }
+    
+    
 }

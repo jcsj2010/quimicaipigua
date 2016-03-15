@@ -9,8 +9,9 @@ package Beans;
  *
  * @author Simone
  */
-public class Cliente {
-    Pessoa cliente;
-    String regiao;
-    Vendedor vendedor;
+public class Cliente extends Pessoa{    
+    
+    Long idCliente;
+    Usuario atendente;
+    
 }
