@@ -21,10 +21,8 @@ public class Pessoa {
     String apelidofantasia;
     String cpfcnpj;
     String rgie;
-    String região;
-    String vendedor;                
-    String referência;
-    String grupo;
+    String região;                    
+    
     
     Date DataAdd;
     Date DataUpd;
@@ -35,4 +33,9 @@ public class Pessoa {
     List<String> emails;
     String telefonePrincipal;  
     List<String> telefones;  
+    
+    public void teste(){
+        Status st = Status.INATIVO;
+        System.out.println( st.getStatus() ); 
+    }
 }

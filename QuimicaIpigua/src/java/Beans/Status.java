@@ -9,6 +9,24 @@ package Beans;
  *
  * @author Simone
  */
-public class Status {
+public enum Status {
+    ATIVO(true),INATIVO(false);
+    
+    private Boolean status;
+    
+    Status(Boolean status ){
+        this.status = status;
+    }
+
+    
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+    
     
 }
