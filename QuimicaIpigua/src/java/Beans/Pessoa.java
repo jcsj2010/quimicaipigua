@@ -8,6 +8,7 @@ package Beans;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -50,7 +51,7 @@ public abstract class Pessoa {
         this.enderecos = new ArrayList();
         this.emailPrincipal = new Email(this);
         this.emails = new ArrayList();
-        this.telefonePrincipal = new Telefone();
+        this.telefonePrincipal = new Telefone(this);
         this.telefones = new ArrayList();
     }
 
@@ -196,6 +197,40 @@ public abstract class Pessoa {
 
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.idPessoa);
+        hash = 67 * hash + Objects.hashCode(this.cpfcnpj);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (!Objects.equals(this.cpfcnpj, other.cpfcnpj)) {
+            return false;
+        }
+        if (!Objects.equals(this.idPessoa, other.idPessoa)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" + "idPessoa=" + idPessoa + ", codigo=" + codigo + ", status=" + status + ", nomeraz\u00e3osocial=" + nomerazãosocial + ", apelidofantasia=" + apelidofantasia + ", cpfcnpj=" + cpfcnpj + ", rgie=" + rgie + ", im=" + im + ", DataAdd=" + DataAdd + ", DataAddAux=" + DataAddAux + ", DataUpd=" + DataUpd + ", DataUpdAux=" + DataUpdAux + ", enderecoPrincipal=" + enderecoPrincipal + ", enderecos=" + enderecos + ", emailPrincipal=" + emailPrincipal + ", emails=" + emails + ", telefonePrincipal=" + telefonePrincipal + ", telefones=" + telefones + '}';
     }
     
     

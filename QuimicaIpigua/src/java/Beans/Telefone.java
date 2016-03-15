@@ -5,6 +5,8 @@
  */
 package Beans;
 
+import java.util.Objects;
+
 /**
  *
  * @author Simone
@@ -16,8 +18,14 @@ public class Telefone {
     private String residencial;
     private String comercial;
     private String outro;
-    
-    public Telefone(){}
+    private Pessoa pessoa;
+    public Telefone(Pessoa p){
+        this.celular = new String();
+        this.residencial = new String();
+        this.comercial = new String();
+        this.outro = new String();
+        this.pessoa = p;
+    }
 
     public Long getId() {
         return id;
@@ -57,6 +65,39 @@ public class Telefone {
 
     public void setOutro(String outro) {
         this.outro = outro;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Telefone other = (Telefone) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
     
