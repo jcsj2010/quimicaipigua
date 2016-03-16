@@ -2,6 +2,7 @@
 import Beans.Cliente;
 import Beans.Email;
 import Beans.Endereco;
+import Beans.Produto;
 
 import Beans.Status;
 import Beans.Usuario;
@@ -76,7 +77,8 @@ public class TesteMain {
         System.out.println("ok");
     }
     public static void main(String[] args){        
-        new TesteMain().addPessoa();
+        //new TesteMain().addPessoa();
         //new TesteMain().addCliente();
+        new Produto().teste();
     }
 }
