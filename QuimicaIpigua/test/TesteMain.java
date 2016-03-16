@@ -1,12 +1,14 @@
 
 import Beans.Email;
-import Beans.Pessoa;
+import Beans.Endereco;
+
 import Beans.Status;
 import Beans.Usuario;
 import Fabricas.FabricaBeans;
 import hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,7 +30,15 @@ public class TesteMain {
         p1.setApelidofantasia("juninho");
         p1.setCodigo("123");
         p1.setCpfcnpj("38351913812");
-        //p1.getEmailPrincipal().setEmail("teste@teste");
+        
+        Email e= new Email();
+        e.setEmail("jcsj2010@gmail.com");
+        p1.getEmails().add(e );
+        
+        Endereco end = new Endereco();
+        end.setBairro("oliveira");
+        end.setCidade("ipigua");
+        p1.getEnderecos().add(end);
         p1.setStatus(Status.ATIVO);
         
         System.out.println(p1);
@@ -36,9 +46,13 @@ public class TesteMain {
         
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session ss = sf.openSession();
+        Transaction tx = ss.beginTransaction();
         //ss.save(p1.getEmailPrincipal());
+        //ss.saveOrUpdate(e);
         ss.save(p1);
+        tx.commit();
         ss.close();
+        
         System.out.println("ok");
     }
     

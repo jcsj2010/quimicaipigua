@@ -25,20 +25,19 @@ import javax.persistence.ManyToOne;
 public class Email implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column
     private String email;
     
-    @ManyToOne   
-    private Pessoa pessoa;
-
-    public Email(){}
     
-    public Email(Pessoa p) {
+
+   
+    
+    public Email() {
         this.email = new String();
-        this.pessoa = p;
+        
     }
 
     public Long getId() {
@@ -57,13 +56,7 @@ public class Email implements Serializable {
         this.email = email;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+    
 
     @Override
     public int hashCode() {

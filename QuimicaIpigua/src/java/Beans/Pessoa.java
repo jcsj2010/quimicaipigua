@@ -30,7 +30,7 @@ import javax.persistence.OneToOne;
 public abstract class Pessoa implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPessoa;
     
     @Column
@@ -69,13 +69,13 @@ public abstract class Pessoa implements Serializable {
     @OneToOne
     private Email emailPrincipal;
     */
-    @OneToMany(mappedBy = "pessoaEnd", targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
     
-    @OneToMany(mappedBy = "pessoa", targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany( targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Email> emails;
     
-    @OneToMany(mappedBy = "pessoaTel", targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefone> telefones;
 
     public Pessoa() {

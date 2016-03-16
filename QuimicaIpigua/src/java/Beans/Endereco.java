@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 public class Endereco implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column
@@ -51,13 +51,11 @@ public class Endereco implements Serializable {
     @Column
     private String regiao;
     
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPessoaEnd")
-    private Pessoa pessoa;
     
-    public Endereco(){}
     
-    public Endereco(Pessoa p){
+    
+    
+    public Endereco(){
     this.cep = new String();
     this.estado = new String();
     this.cidade = new String();
@@ -66,7 +64,7 @@ public class Endereco implements Serializable {
     this.numero = new String();
     this.complemento = new String();
     this.regiao = new String();
-    this.pessoa = p;
+    
     }
 
     public Long getId() {
@@ -141,13 +139,7 @@ public class Endereco implements Serializable {
         this.regiao = regiao;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+    
     
     
 }

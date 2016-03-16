@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 public class Telefone implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column
@@ -39,19 +39,16 @@ public class Telefone implements Serializable {
     
     @Column
     private String outro;
+        
     
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPessoaTel")
-    private Pessoa pessoa;
     
-    public Telefone(){}
     
-    public Telefone(Pessoa p){
+    public Telefone(){
         this.celular = new String();
         this.residencial = new String();
         this.comercial = new String();
         this.outro = new String();
-        this.pessoa = p;
+        
     }
 
     public Long getId() {
@@ -94,13 +91,7 @@ public class Telefone implements Serializable {
         this.outro = outro;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+    
 
     @Override
     public int hashCode() {
