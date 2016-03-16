@@ -5,20 +5,47 @@
  */
 package Beans;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Simone
  */
-public class Telefone {
+@Entity
+public class Telefone implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    
+    @Column
     private String celular;
+    
+    @Column
     private String residencial;
+    
+    @Column
     private String comercial;
+    
+    @Column
     private String outro;
+    
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPessoaTel")
     private Pessoa pessoa;
+    
+    public Telefone(){}
+    
     public Telefone(Pessoa p){
         this.celular = new String();
         this.residencial = new String();

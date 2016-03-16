@@ -5,18 +5,37 @@
  */
 package Beans;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Simone
  */
-public class Email {
+@Entity
+public class Email implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    
+    @Column
     private String email;
+    
+    @ManyToOne   
     private Pessoa pessoa;
 
+    public Email(){}
+    
     public Email(Pessoa p) {
         this.email = new String();
         this.pessoa = p;

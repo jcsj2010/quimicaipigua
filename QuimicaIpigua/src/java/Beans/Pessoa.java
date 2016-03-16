@@ -5,32 +5,77 @@
  */
 package Beans;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Simone
  */
-public abstract class Pessoa {
 
+@MappedSuperclass
+public abstract class Pessoa implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idPessoa;
+    
+    @Column
     private String codigo;
+    
+    @Column
     private Status status;
+    
+    @Column
     private String nomerazãosocial;
+    
+    @Column
     private String apelidofantasia;
+    
+    @Column
     private String cpfcnpj;
+    
+    @Column
     private String rgie;
+    
+    @Column
     private String im;
-    private java.sql.Date DataAdd; private java.util.Date DataAddAux;
-    private java.sql.Date DataUpd; private java.util.Date DataUpdAux;
+    
+    
+    private java.sql.Date DataAdd; 
+    private java.util.Date DataAddAux;
+    private java.sql.Date DataUpd; 
+    private java.util.Date DataUpdAux;
+    /*
+    @OneToOne
     private Endereco enderecoPrincipal;
-    private List<Endereco> enderecos;
-    private Email emailPrincipal;
-    private List<Email> emails;
+    
+    @OneToOne
     private Telefone telefonePrincipal;
+    
+    @OneToOne
+    private Email emailPrincipal;
+    */
+    @OneToMany(mappedBy = "pessoaEnd", targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Endereco> enderecos;
+    
+    @OneToMany(mappedBy = "pessoa", targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Email> emails;
+    
+    @OneToMany(mappedBy = "pessoaTel", targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefone> telefones;
 
     public Pessoa() {
@@ -47,11 +92,11 @@ public abstract class Pessoa {
         this.DataAdd = new Date(this.DataAddAux.getTime());
         this.DataUpd = new Date(this.DataUpdAux.getTime());
         //////////////////
-        this.enderecoPrincipal = new Endereco(this);
+        //this.enderecoPrincipal = new Endereco(this);
         this.enderecos = new ArrayList();
-        this.emailPrincipal = new Email(this);
+        //this.emailPrincipal = new Email(this);
         this.emails = new ArrayList();
-        this.telefonePrincipal = new Telefone(this);
+        //this.telefonePrincipal = new Telefone(this);
         this.telefones = new ArrayList();
     }
 
@@ -150,7 +195,7 @@ public abstract class Pessoa {
     public void setDataUpdAux(java.util.Date DataUpdAux) {
         this.DataUpdAux = DataUpdAux;
     }
-
+/*
     public Endereco getEnderecoPrincipal() {
         return enderecoPrincipal;
     }
@@ -158,7 +203,7 @@ public abstract class Pessoa {
     public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
         this.enderecoPrincipal = enderecoPrincipal;
     }
-
+*/
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -166,7 +211,7 @@ public abstract class Pessoa {
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
-
+/*
     public Email getEmailPrincipal() {
         return emailPrincipal;
     }
@@ -174,7 +219,7 @@ public abstract class Pessoa {
     public void setEmailPrincipal(Email emailPrincipal) {
         this.emailPrincipal = emailPrincipal;
     }
-
+*/
     public List<Email> getEmails() {
         return emails;
     }
@@ -182,7 +227,7 @@ public abstract class Pessoa {
     public void setEmails(List<Email> emails) {
         this.emails = emails;
     }
-
+/*
     public Telefone getTelefonePrincipal() {
         return telefonePrincipal;
     }
@@ -190,7 +235,7 @@ public abstract class Pessoa {
     public void setTelefonePrincipal(Telefone telefonePrincipal) {
         this.telefonePrincipal = telefonePrincipal;
     }
-
+*/
     public List<Telefone> getTelefones() {
         return telefones;
     }
@@ -230,7 +275,7 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "idPessoa=" + idPessoa + ", codigo=" + codigo + ", status=" + status + ", nomeraz\u00e3osocial=" + nomerazãosocial + ", apelidofantasia=" + apelidofantasia + ", cpfcnpj=" + cpfcnpj + ", rgie=" + rgie + ", im=" + im + ", DataAdd=" + DataAdd + ", DataAddAux=" + DataAddAux + ", DataUpd=" + DataUpd + ", DataUpdAux=" + DataUpdAux + ", enderecoPrincipal=" + enderecoPrincipal + ", enderecos=" + enderecos + ", emailPrincipal=" + emailPrincipal + ", emails=" + emails + ", telefonePrincipal=" + telefonePrincipal + ", telefones=" + telefones + '}';
+        return "Pessoa{" + "idPessoa=" + idPessoa + ", codigo=" + codigo + ", status=" + status + ", nomeraz\u00e3osocial=" + nomerazãosocial + ", apelidofantasia=" + apelidofantasia + ", cpfcnpj=" + cpfcnpj + ", rgie=" + rgie + ", im=" + im + ", DataAdd=" + DataAdd + ", DataAddAux=" + DataAddAux + ", DataUpd=" + DataUpd + ", DataUpdAux=" + DataUpdAux + ", enderecoPrincipal=" +  ", enderecos=" + enderecos + ", emailPrincipal=" +  ", emails=" + emails + ", telefonePrincipal=" + ", telefones=" + telefones + '}';
     }
     
     

@@ -5,16 +5,35 @@
  */
 package Beans;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+
+
 /**
  *
  * @author Simone
  */
-public class Usuario extends Pessoa{   
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Usuario extends Pessoa implements Serializable{   
     
-    private Long idUsuario;
+    //private Long idUsuario;
+    
+    @Column
     private String login;
-    private String password;    
+    
+    @Column
+    private String password;  
+    
+    @Column
     private Cargo cargo;
+    
+    @Column(precision = 2)
     private Float comissao;
     
     public Usuario(){
@@ -24,13 +43,14 @@ public class Usuario extends Pessoa{
     this.comissao = 0.1f;
     }
 
+    /*
     public Long getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
-    }
+    }*/
 
     public String getLogin() {
         return login;

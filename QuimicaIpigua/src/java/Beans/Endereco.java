@@ -5,22 +5,57 @@
  */
 package Beans;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Simone
  */
-public class Endereco {
+@Entity
+public class Endereco implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    
+    @Column
     private String cep;
+    
+    @Column
     private String estado;
+    
+    @Column
     private String cidade;
+    
+    @Column
     private String bairro;
+    
+    @Column
     private String logradouro;
+    
+    @Column
     private String numero;
+    
+    @Column
     private String complemento;
+    
+    @Column
     private String regiao;
+    
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPessoaEnd")
     private Pessoa pessoa;
+    
+    public Endereco(){}
     
     public Endereco(Pessoa p){
     this.cep = new String();
