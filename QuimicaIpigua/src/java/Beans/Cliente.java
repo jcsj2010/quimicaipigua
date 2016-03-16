@@ -6,27 +6,29 @@
 package Beans;
 
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Simone
  */
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Cliente extends Pessoa{    
     
-    private Long idCliente;
+    @OneToOne(fetch = FetchType.LAZY)
     private Usuario atendente;
     
     public Cliente(Usuario u){
         this.atendente = u;
     }
 
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
+   
 
     public Usuario getAtendente() {
         return atendente;
@@ -36,30 +38,9 @@ public class Cliente extends Pessoa{
         this.atendente = atendente;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.idCliente);
-        return hash;
-    }
+    
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.idCliente, other.idCliente)) {
-            return false;
-        }
-        return true;
-    }
+    
     
     
 }

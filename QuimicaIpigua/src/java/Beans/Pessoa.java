@@ -6,75 +6,67 @@
 package Beans;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Simone
  */
-
 @MappedSuperclass
 public abstract class Pessoa implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPessoa;
-    
+
     @Column
     private String codigo;
-    
-    @Column
+
+    @Enumerated(EnumType.STRING)
     private Status status;
-    
+
     @Column
     private String nomerazãosocial;
-    
+
     @Column
     private String apelidofantasia;
-    
+
     @Column
     private String cpfcnpj;
-    
+
     @Column
     private String rgie;
-    
+
     @Column
     private String im;
-    
-    
-    private java.sql.Date DataAdd; 
-    private java.util.Date DataAddAux;
-    private java.sql.Date DataUpd; 
-    private java.util.Date DataUpdAux;
-    /*
-    @OneToOne
-    private Endereco enderecoPrincipal;
-    
-    @OneToOne
-    private Telefone telefonePrincipal;
-    
-    @OneToOne
-    private Email emailPrincipal;
-    */
+
+    @Temporal(TemporalType.DATE)
+    private Date DataAdd;
+
+    @Temporal(TemporalType.DATE)
+    private Date DataUpd;
+
     @OneToMany(targetEntity = Endereco.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
-    
-    @OneToMany( targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @OneToMany(targetEntity = Email.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Email> emails;
-    
+
     @OneToMany(targetEntity = Telefone.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefone> telefones;
 
@@ -87,16 +79,15 @@ public abstract class Pessoa implements Serializable {
         this.rgie = new String();
         this.im = new String();
         //formatacao data
-        this.DataAddAux = new Date(System.currentTimeMillis());
-        this.DataUpdAux = new Date(System.currentTimeMillis());
-        this.DataAdd = new Date(this.DataAddAux.getTime());
-        this.DataUpd = new Date(this.DataUpdAux.getTime());
+
+        this.DataAdd = new Date(System.currentTimeMillis());
+        this.DataUpd = new Date(System.currentTimeMillis());
         //////////////////
-        //this.enderecoPrincipal = new Endereco(this);
+
         this.enderecos = new ArrayList();
-        //this.emailPrincipal = new Email(this);
+
         this.emails = new ArrayList();
-        //this.telefonePrincipal = new Telefone(this);
+
         this.telefones = new ArrayList();
     }
 
@@ -164,7 +155,7 @@ public abstract class Pessoa implements Serializable {
         this.im = im;
     }
 
-    public java.sql.Date getDataAdd() {
+    public Date getDataAdd() {
         return DataAdd;
     }
 
@@ -172,15 +163,7 @@ public abstract class Pessoa implements Serializable {
         this.DataAdd = DataAdd;
     }
 
-    public java.util.Date getDataAddAux() {
-        return DataAddAux;
-    }
-
-    public void setDataAddAux(java.util.Date DataAddAux) {
-        this.DataAddAux = DataAddAux;
-    }
-
-    public java.sql.Date getDataUpd() {
+    public Date getDataUpd() {
         return DataUpd;
     }
 
@@ -188,22 +171,6 @@ public abstract class Pessoa implements Serializable {
         this.DataUpd = DataUpd;
     }
 
-    public java.util.Date getDataUpdAux() {
-        return DataUpdAux;
-    }
-
-    public void setDataUpdAux(java.util.Date DataUpdAux) {
-        this.DataUpdAux = DataUpdAux;
-    }
-/*
-    public Endereco getEnderecoPrincipal() {
-        return enderecoPrincipal;
-    }
-
-    public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
-        this.enderecoPrincipal = enderecoPrincipal;
-    }
-*/
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -211,7 +178,8 @@ public abstract class Pessoa implements Serializable {
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
-/*
+
+    /*
     public Email getEmailPrincipal() {
         return emailPrincipal;
     }
@@ -219,7 +187,7 @@ public abstract class Pessoa implements Serializable {
     public void setEmailPrincipal(Email emailPrincipal) {
         this.emailPrincipal = emailPrincipal;
     }
-*/
+     */
     public List<Email> getEmails() {
         return emails;
     }
@@ -227,7 +195,8 @@ public abstract class Pessoa implements Serializable {
     public void setEmails(List<Email> emails) {
         this.emails = emails;
     }
-/*
+
+    /*
     public Telefone getTelefonePrincipal() {
         return telefonePrincipal;
     }
@@ -235,7 +204,7 @@ public abstract class Pessoa implements Serializable {
     public void setTelefonePrincipal(Telefone telefonePrincipal) {
         this.telefonePrincipal = telefonePrincipal;
     }
-*/
+     */
     public List<Telefone> getTelefones() {
         return telefones;
     }
@@ -275,9 +244,7 @@ public abstract class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "idPessoa=" + idPessoa + ", codigo=" + codigo + ", status=" + status + ", nomeraz\u00e3osocial=" + nomerazãosocial + ", apelidofantasia=" + apelidofantasia + ", cpfcnpj=" + cpfcnpj + ", rgie=" + rgie + ", im=" + im + ", DataAdd=" + DataAdd + ", DataAddAux=" + DataAddAux + ", DataUpd=" + DataUpd + ", DataUpdAux=" + DataUpdAux + ", enderecoPrincipal=" +  ", enderecos=" + enderecos + ", emailPrincipal=" +  ", emails=" + emails + ", telefonePrincipal=" + ", telefones=" + telefones + '}';
+        return "Pessoa{" + "idPessoa=" + idPessoa + ", codigo=" + codigo + ", status=" + status + ", nomeraz\u00e3osocial=" + nomerazãosocial + ", apelidofantasia=" + apelidofantasia + ", cpfcnpj=" + cpfcnpj + ", rgie=" + rgie + ", im=" + im + ", DataAdd=" + DataAdd + ", DataAddAux=" + ", DataUpd=" + DataUpd + ", DataUpdAux=" + ", enderecoPrincipal=" + ", enderecos=" + enderecos + ", emailPrincipal=" + ", emails=" + emails + ", telefonePrincipal=" + ", telefones=" + telefones + '}';
     }
-    
-    
 
 }

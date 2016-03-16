@@ -1,4 +1,5 @@
 
+import Beans.Cliente;
 import Beans.Email;
 import Beans.Endereco;
 
@@ -23,6 +24,8 @@ import org.hibernate.Transaction;
 public class TesteMain {
     FabricaBeans cria = new FabricaBeans();
     Usuario p1 = cria.criaUsuario();
+    Cliente cli = new Cliente(p1);
+    
     public void addPessoa(){
         
                 
@@ -55,8 +58,25 @@ public class TesteMain {
         
         System.out.println("ok");
     }
-    
+    public void addCliente(){
+        cli.setApelidofantasia("Junior");
+        cli.setCodigo("123");
+        cli.getAtendente().setApelidofantasia("santana");
+        Email mail=new Email();
+        mail.setEmail("santana@terra");
+        cli.getEmails().add(mail);
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session ss = sf.openSession();
+        Transaction tx = ss.beginTransaction();
+        ss.save(p1);
+        ss.save(cli);
+        tx.commit();
+        ss.close();
+        
+        System.out.println("ok");
+    }
     public static void main(String[] args){        
         new TesteMain().addPessoa();
+        //new TesteMain().addCliente();
     }
 }
