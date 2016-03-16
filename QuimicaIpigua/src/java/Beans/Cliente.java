@@ -24,6 +24,7 @@ public class Cliente extends Pessoa{
     @OneToOne(fetch = FetchType.LAZY)
     private Usuario atendente;
     
+    public Cliente(){}
     public Cliente(Usuario u){
         this.atendente = u;
     }
@@ -36,6 +37,11 @@ public class Cliente extends Pessoa{
 
     public void setAtendente(Usuario atendente) {
         this.atendente = atendente;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "atendente=" + atendente + '}';
     }
 
     
