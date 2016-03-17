@@ -8,7 +8,6 @@ package Beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,11 +17,11 @@ import javax.persistence.ManyToMany;
 
 /**
  *
- * @author Simone
+ * @author JoseCarlos
  */
 @Entity
-public class Produto implements Serializable {
-
+public class MateriaPrima implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,16 +33,10 @@ public class Produto implements Serializable {
     private Double valor;
     
     @Column
-    private Double estoque;
+    private Double estoque;    
     
     @Column
-    private Double custo;
-    
-    @Column
-    private Status status;
-    
-    @Column
-    private Boolean produzir;
+    private Status status;    
     
     @Column
     private String marca;
@@ -64,10 +57,7 @@ public class Produto implements Serializable {
     private String codBarras;
     
     @Column
-    private String cor;
-    
-    @Column
-    private String formula;
+    private String cor;    
     
     @Column
     private String especificacoes;
@@ -78,28 +68,25 @@ public class Produto implements Serializable {
     @Column
     private String embalagems;
     
-    @ManyToMany(cascade = CascadeType.REMOVE,targetEntity = MateriaPrima.class,mappedBy = "produto")
-    private List<MateriaPrima> materiaprimas;
-
-    public Produto() {
+    @ManyToMany(targetEntity = Produto.class)
+    private List<Produto> produto;
+    
+    public MateriaPrima() {
         this.descricao = new String();
         this.valor = new Double(0);
         this.estoque = new Double(0);
-        this.custo = new Double(0);
-        this.status = Status.ATIVO;
-        this.produzir = true;
+        this.status = Status.ATIVO;       
         this.marca = new String();
         this.fabricante = new String();
         this.grupo = new String();
         this.codSuaEmpresa = new String();
         this.codFabricante = new String();
         this.codBarras = new String();
-        this.cor = new String();
-        this.formula = new String();
+        this.cor = new String();        
         this.especificacoes = new String();
         this.fornecedores = new String();
         this.embalagems = new String();
-        this.materiaprimas = new ArrayList();
+        this.produto = new ArrayList();
     }
 
     public Long getId() {
@@ -134,28 +121,12 @@ public class Produto implements Serializable {
         this.estoque = estoque;
     }
 
-    public Double getCusto() {
-        return custo;
-    }
-
-    public void setCusto(Double custo) {
-        this.custo = custo;
-    }
-
     public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Boolean getProduzir() {
-        return produzir;
-    }
-
-    public void setProduzir(Boolean produzir) {
-        this.produzir = produzir;
     }
 
     public String getMarca() {
@@ -214,14 +185,6 @@ public class Produto implements Serializable {
         this.cor = cor;
     }
 
-    public String getFormula() {
-        return formula;
-    }
-
-    public void setFormula(String formula) {
-        this.formula = formula;
-    }
-
     public String getEspecificacoes() {
         return especificacoes;
     }
@@ -246,13 +209,13 @@ public class Produto implements Serializable {
         this.embalagems = embalagems;
     }
 
-    public List getMateriaprimas() {
-        return materiaprimas;
+    public List getProduto() {
+        return produto;
     }
 
-    public void setMateriaprimas(List materiaprimas) {
-        this.materiaprimas = materiaprimas;
+    public void setProduto(List produto) {
+        this.produto = produto;
     }
-
+    
     
 }

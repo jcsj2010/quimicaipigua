@@ -2,6 +2,7 @@
 import Beans.Cliente;
 import Beans.Email;
 import Beans.Endereco;
+import Beans.MateriaPrima;
 import Beans.Produto;
 
 import Beans.Status;
@@ -76,9 +77,31 @@ public class TesteMain {
         
         System.out.println("ok");
     }
+    
+    public void addProduto(){
+        Produto p = new Produto();
+        MateriaPrima mp = new MateriaPrima();
+        
+        p.setDescricao("ativado ls");
+        mp.setDescricao("acido sulfonico");
+        
+        p.getMateriaprimas().add(mp);
+        mp.getProduto().add(p);
+        
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session ss = sf.openSession();
+        Transaction tx = ss.beginTransaction();
+        ss.save(mp);
+        ss.save(p);
+        tx.commit();
+        ss.close();
+        
+        System.out.println("ok");
+    }
+    
     public static void main(String[] args){        
-        //new TesteMain().addPessoa();
+        new TesteMain().addProduto();
         //new TesteMain().addCliente();
-        new Produto().teste();
+        
     }
 }

@@ -9,11 +9,12 @@ import Beans.Cargo;
 import Beans.Cliente;
 import Beans.Email;
 import Beans.Endereco;
+import Beans.MateriaPrima;
 import Beans.Pessoa;
+import Beans.Produto;
 import Beans.Status;
 import Beans.Telefone;
 import Beans.Usuario;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -41,6 +42,8 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(Status.class);
             configuration.addAnnotatedClass(Telefone.class);
             configuration.addAnnotatedClass(Pessoa.class);
+            configuration.addAnnotatedClass(Produto.class);
+            configuration.addAnnotatedClass(MateriaPrima.class);
             ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
