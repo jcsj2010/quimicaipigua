@@ -11,10 +11,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -75,8 +78,8 @@ public class Produto implements Serializable {
     @Column
     private String fornecedores;
     
-    @Column
-    private String embalagems;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Embalagem> embalagems;
     
     
 
@@ -97,7 +100,7 @@ public class Produto implements Serializable {
         this.formula = new String();
         this.especificacoes = new String();
         this.fornecedores = new String();
-        this.embalagems = new String();
+        this.embalagems = new ArrayList();
        
     }
 
@@ -237,14 +240,15 @@ public class Produto implements Serializable {
         this.fornecedores = fornecedores;
     }
 
-    public String getEmbalagems() {
+    public List<Embalagem> getEmbalagems() {
         return embalagems;
     }
 
-    public void setEmbalagems(String embalagems) {
+    public void setEmbalagems(List<Embalagem> embalagems) {
         this.embalagems = embalagems;
     }
 
+    
     
 
     

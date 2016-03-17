@@ -8,7 +8,9 @@ package hibernate;
 import Beans.Cargo;
 import Beans.Cliente;
 import Beans.Email;
+import Beans.Embalagem;
 import Beans.Endereco;
+import Beans.EstoqueProduto;
 import Beans.Formula;
 import Beans.MateriaPrima;
 import Beans.Pessoa;
@@ -46,6 +48,8 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(Produto.class);
             configuration.addAnnotatedClass(MateriaPrima.class);
             configuration.addAnnotatedClass(Formula.class);
+            configuration.addAnnotatedClass(Embalagem.class);
+            configuration.addAnnotatedClass(EstoqueProduto.class);
             ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
