@@ -22,14 +22,54 @@ public class Formula implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
     
     @OneToOne
-    Produto produto;
+    private Produto produto;
     
     @OneToOne
-    MateriaPrima materiaPrima;
+    private MateriaPrima materiaPrima;
     
     @Column
-    Double quantidade;
+    private Double quantidade;
+    
+    public Formula(){
+        this.produto = new Produto();
+        this.materiaPrima = new MateriaPrima();
+        this.quantidade = 0.0;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public MateriaPrima getMateriaPrima() {
+        return materiaPrima;
+    }
+
+    public void setMateriaPrima(MateriaPrima materiaPrima) {
+        this.materiaPrima = materiaPrima;
+    }
+
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    
 }

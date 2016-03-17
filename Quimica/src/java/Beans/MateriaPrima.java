@@ -68,8 +68,6 @@ public class MateriaPrima implements Serializable {
     @Column
     private String embalagems;
     
-    @ManyToMany(targetEntity = Produto.class)
-    private List<Produto> produto;
     
     public MateriaPrima() {
         this.descricao = new String();
@@ -86,7 +84,7 @@ public class MateriaPrima implements Serializable {
         this.especificacoes = new String();
         this.fornecedores = new String();
         this.embalagems = new String();
-        this.produto = new ArrayList();
+        
     }
 
     public Long getId() {
@@ -209,13 +207,5 @@ public class MateriaPrima implements Serializable {
         this.embalagems = embalagems;
     }
 
-    public List getProduto() {
-        return produto;
-    }
-
-    public void setProduto(List produto) {
-        this.produto = produto;
-    }
-    
     
 }

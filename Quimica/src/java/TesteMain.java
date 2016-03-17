@@ -2,6 +2,7 @@
 import Beans.Cliente;
 import Beans.Email;
 import Beans.Endereco;
+import Beans.Formula;
 import Beans.MateriaPrima;
 import Beans.Produto;
 
@@ -9,9 +10,13 @@ import Beans.Status;
 import Beans.Usuario;
 import Fabricas.FabricaBeans;
 import hibernate.HibernateUtil;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,7 +32,7 @@ public class TesteMain {
     FabricaBeans cria = new FabricaBeans();
     Usuario p1 = cria.criaUsuario();
     Cliente cli = new Cliente(p1);
-    
+    List<Formula> fff;
     public void addPessoa(){
         
                 
@@ -84,9 +89,7 @@ public class TesteMain {
         
         p.setDescricao("ativado ls");
         mp.setDescricao("acido sulfonico");
-        
-        p.getMateriaprimas().add(mp);
-        mp.getProduto().add(p);
+      
         
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session ss = sf.openSession();
@@ -98,9 +101,59 @@ public class TesteMain {
         
         System.out.println("ok");
     }
-    
+    public void addMP(){
+        MateriaPrima mp1 = new MateriaPrima();mp1.setDescricao("acido cloridrico");
+        MateriaPrima mp2 = new MateriaPrima();mp2.setDescricao("acido sulfurico");
+        MateriaPrima mp3 = new MateriaPrima();mp3.setDescricao("acido fluoridrico");
+        MateriaPrima mp4 = new MateriaPrima();mp4.setDescricao("renex");
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session ss = sf.openSession();
+        Transaction tx = ss.beginTransaction();
+        ss.save(mp1);
+        ss.save(mp2);
+        ss.save(mp3);
+        ss.save(mp4);
+        tx.commit();
+        ss.close();
+        
+        System.out.println("ok");
+        
+    }
+    public void addFormula(){
+        Formula f = new Formula();
+        
+        
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session ss = sf.openSession();
+        Transaction tx = ss.beginTransaction();
+        Produto pp;
+        pp = (Produto) ss.load(Produto.class,1L);
+        MateriaPrima mp = (MateriaPrima) ss.load(MateriaPrima.class, 3L);
+        f.setProduto(pp);
+        f.setMateriaPrima(mp);
+        f.setQuantidade(75.0);
+        
+        ss.save(f);
+        tx.commit();
+        ss.close();
+    }
+    public void buscaFormula(){
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session ss = sf.openSession();
+        Transaction tx = ss.beginTransaction();
+        Criteria crit = ss.createCriteria(Formula.class);
+        crit.add(Restrictions.like("produto.id", 1L));
+        List<Formula> fff = crit.list();
+        
+        tx.commit();
+        ss.close();
+        
+        for(Formula a: fff){
+            System.out.println(a.getMateriaPrima().getDescricao());
+        }
+    }
     public static void main(String[] args){        
-        new TesteMain().addProduto();
+        new TesteMain().buscaFormula();
         //new TesteMain().addCliente();
         
     }

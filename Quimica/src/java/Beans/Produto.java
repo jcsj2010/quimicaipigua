@@ -78,8 +78,7 @@ public class Produto implements Serializable {
     @Column
     private String embalagems;
     
-    @ManyToMany(cascade = CascadeType.REMOVE,targetEntity = MateriaPrima.class,mappedBy = "produto")
-    private List<MateriaPrima> materiaprimas;
+    
 
     public Produto() {
         this.descricao = new String();
@@ -99,7 +98,7 @@ public class Produto implements Serializable {
         this.especificacoes = new String();
         this.fornecedores = new String();
         this.embalagems = new String();
-        this.materiaprimas = new ArrayList();
+       
     }
 
     public Long getId() {
@@ -246,13 +245,7 @@ public class Produto implements Serializable {
         this.embalagems = embalagems;
     }
 
-    public List getMateriaprimas() {
-        return materiaprimas;
-    }
-
-    public void setMateriaprimas(List materiaprimas) {
-        this.materiaprimas = materiaprimas;
-    }
+    
 
     
 }
